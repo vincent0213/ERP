@@ -53,7 +53,7 @@ func main() {
 	// 注册一个动态路由
 	// 可以匹配 /user/joy
 	// 不能匹配 /user 和 /user/
-	engine.GET("/demo/:name/*acton", func(c *gin.Context) {
+	engine.GET("/demo/:name", func(c *gin.Context) {
 		// 使用 c.Param(key) 获取 url 参数
 		// 注意下面将gin.H参数传入index.tmpl中!也就是使用的是index.tmpl模板
 		name := c.Param("name")
