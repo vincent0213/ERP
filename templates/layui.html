@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/layui/css/modules/code.css">
+    <link rel="stylesheet" href="/static/layui/css/global.css">
+    <link rel="stylesheet" href="/static/layui/css/vincent.css">
+    <link rel="stylesheet" href="/static/layui/css/modules/layer/default/layer.css">
+    <script src="/static/js/jquery-3.3.1.min.js">
+    </script>
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header header header-demo" winter="">
+            <div class="layui-main">
+                <a class="logo" href="/">
+                    <img src="/static/image/logo.png" alt="layui" />
+                </a>
+                <ul class="layui-nav">
+                    <li class="layui-nav-item ">
+                        <a href="/doc/">文档
+                            <!-- <span class="layui-badge-dot"></span> --></a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                        <a href="/admin/">后台模板<span class="layui-badge-dot" style="margin-top: -5px;"></span></a>
+                    </li>
+                    <span class="layui-nav-bar"></span>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree site-demo-nav">
+                    <li class="layui-nav-item">
+                        <a class="javascript:;" href="javascript:;">开发工具<span class="layui-nav-more"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="/demo/edit.html" target="main_self_frame">调试预览</a>
+                            </dd>
+                             <dd>
+                                <a href="/demo/form.html" target="main_self_frame">表单</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="javascript:;" href="javascript:;">布局<span class="layui-nav-more"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="/demo/grid.html">栅格</a>
+                            </dd>
+                            <dd class="">
+                                <a href="/demo/admin.html">后台布局</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="javascript:;" href="javascript:;">基本元素<span class="layui-nav-more"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="/demo/button.html">按钮</a>
+                            </dd>
+                            <dd class="layui-nav-child">
+                                <a href="/demo/form.html">表单</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="javascript:;" href="javascript:;">组件示例<span class="layui-nav-more"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="/demo/layer.html">
+                                    弹出层
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="/demo/laydate.html">
+                                    日期与时间选择
+                                </a>
+                            </dd>
+                    </li>
+                    <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+                    <span class="layui-nav-bar" style="top: 22.5px; height: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body site-demo">
+            <div class="site-demo-result">
+                <!-- <div class="mymargin"> -->
+                <iframe src="/demo/edit.html" name="main_self_frame" frameborder="0" class="layadmin-iframe"></iframe>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- 你的HTML代码 -->
+    <script src="/static/layui/layui.js"></script>
+    <script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function() {
+        var layer = layui.layer,
+            form = layui.form;
+        layer.msg('Hello World');
+    });
+
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function() {
+        var element = layui.element;
+        //监听Tab切换
+        element.on('tab(demo)', function(data) {
+            layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
+                tips: 1
+            });
+        });
+    });
+
+    //执行一个 table 实例
+    table.render({
+        elem: '#demo',
+        height: 420,
+        url: '/demo/table/user/' //数据接口
+            ,
+        title: '用户表',
+        page: true //开启分页
+            ,
+        toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,
+        totalRow: true //开启合计行
+            ,
+        cols: [
+            [ //表头
+                { type: 'checkbox', fixed: 'left' }, { field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', totalRowText: '合计：' }, { field: 'username', title: '用户名', width: 80 }, { field: 'experience', title: '积分', width: 90, sort: true, totalRow: true }, { field: 'sex', title: '性别', width: 80, sort: true }, { field: 'score', title: '评分', width: 80, sort: true, totalRow: true }, { field: 'city', title: '城市', width: 150 }, { field: 'sign', title: '签名', width: 200 }, { field: 'classify', title: '职业', width: 100 }, { field: 'wealth', title: '财富', width: 135, sort: true, totalRow: true }, { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
+            ]
+        ]
+    });
+    </script>
+</body>
+
+</html>
